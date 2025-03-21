@@ -376,25 +376,23 @@ const BlogCard = React.memo(({ post, mode, getCategoryColor, navigate }) => (
       </Box>
       <Typography
         variant="h6"
-        gutterBottom
+        component="h2"
         sx={{
-          fontSize: "1.1rem",
           fontWeight: 600,
-          lineHeight: 1.3,
           mb: 1,
+          fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
+          lineHeight: 1.4,
         }}
       >
         {post.title}
       </Typography>
       <Typography
         variant="body2"
-        color="text.secondary"
         sx={{
+          color: "text.secondary",
           mb: 2,
-          display: "-webkit-box",
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
+          fontSize: { xs: "0.75rem", sm: "0.875rem" },
+          lineHeight: 1.6,
         }}
       >
         {post.excerpt}
@@ -593,64 +591,74 @@ function App() {
     palette: {
       mode,
       primary: {
-        main: "#2196f3",
-        light: "#64b5f6",
-        dark: "#1976d2",
+        main: "#2563eb",
+        light: "#60a5fa",
+        dark: "#1d4ed8",
+      },
+      secondary: {
+        main: "#7c3aed",
+        light: "#a78bfa",
+        dark: "#5b21b6",
       },
       background: {
-        default: mode === "dark" ? "#121212" : "#f8f9fa",
-        paper: mode === "dark" ? "#1e1e1e" : "#ffffff",
+        default: mode === "light" ? "#f8fafc" : "#0f172a",
+        paper: mode === "light" ? "#ffffff" : "#1e293b",
       },
     },
     typography: {
-      fontFamily: '"Figtree", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Figtree", "Inter", sans-serif',
+      h1: {
+        fontSize: "clamp(2rem, 5vw, 3.5rem)",
+        fontWeight: 700,
+        lineHeight: 1.2,
+      },
+      h2: {
+        fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+        fontWeight: 600,
+        lineHeight: 1.3,
+      },
+      h3: {
+        fontSize: "clamp(1.25rem, 3vw, 2rem)",
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      h4: {
+        fontSize: "clamp(1.1rem, 2.5vw, 1.75rem)",
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      h5: {
+        fontSize: "clamp(1rem, 2vw, 1.5rem)",
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      h6: {
+        fontSize: "clamp(0.875rem, 1.75vw, 1.25rem)",
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      body1: {
+        fontSize: "clamp(0.875rem, 2vw, 1rem)",
+        lineHeight: 1.6,
+      },
+      body2: {
+        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+        lineHeight: 1.6,
+      },
+      button: {
+        textTransform: "none",
+        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+        fontWeight: 500,
+      },
     },
     components: {
       MuiTableCell: {
         styleOverrides: {
           root: {
-            borderBottom: `1px solid ${mode === "dark" ? "#333" : "#f0f0f0"}`,
-            padding: "16px",
-          },
-          head: {
-            backgroundColor: "transparent",
-            fontWeight: 600,
-            color: mode === "dark" ? "#fff" : "#333",
-          },
-        },
-      },
-      MuiTableRow: {
-        styleOverrides: {
-          root: {
-            "&:hover": {
-              backgroundColor: mode === "dark" ? "#1a1a1a" : "#f8f8f8",
-              boxShadow:
-                mode === "dark"
-                  ? "0 2px 8px rgba(0,0,0,0.2)"
-                  : "0 2px 8px rgba(0,0,0,0.05)",
-            },
-          },
-        },
-      },
-      MuiChip: {
-        styleOverrides: {
-          root: {
-            height: "24px",
-            borderRadius: "12px",
-            cursor: "pointer",
-            boxShadow:
-              mode === "dark"
-                ? "0 1px 3px rgba(0,0,0,0.2)"
-                : "0 1px 3px rgba(0,0,0,0.1)",
-            "& .MuiChip-label": {
-              fontSize: "0.75rem",
-              padding: "0 8px",
-            },
-            "&:hover": {
-              boxShadow:
-                mode === "dark"
-                  ? "0 2px 5px rgba(0,0,0,0.3)"
-                  : "0 2px 5px rgba(0,0,0,0.15)",
+            fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+            padding: "8px 16px",
+            "@media (max-width: 600px)": {
+              padding: "6px 12px",
             },
           },
         },
@@ -658,69 +666,29 @@ function App() {
       MuiCard: {
         styleOverrides: {
           root: {
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            transition: "all 0.2s ease-in-out",
-            boxShadow:
-              mode === "dark"
-                ? "0 2px 8px rgba(0,0,0,0.2)"
-                : "0 2px 8px rgba(0,0,0,0.05)",
-            "&:hover": {
-              transform: "translateY(-4px)",
-              boxShadow:
-                mode === "dark"
-                  ? "0 8px 24px rgba(0,0,0,0.3)"
-                  : "0 8px 24px rgba(0,0,0,0.1)",
+            "@media (max-width: 600px)": {
+              margin: "8px 0",
             },
           },
         },
       },
-      MuiAppBar: {
+      MuiChip: {
         styleOverrides: {
           root: {
-            boxShadow:
-              mode === "dark"
-                ? "0 2px 8px rgba(0,0,0,0.2)"
-                : "0 2px 8px rgba(0,0,0,0.05)",
-          },
-        },
-      },
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            "& .MuiOutlinedInput-root": {
-              boxShadow:
-                mode === "dark"
-                  ? "0 1px 3px rgba(0,0,0,0.2)"
-                  : "0 1px 3px rgba(0,0,0,0.05)",
-              "&:hover": {
-                boxShadow:
-                  mode === "dark"
-                    ? "0 2px 5px rgba(0,0,0,0.3)"
-                    : "0 2px 5px rgba(0,0,0,0.1)",
-              },
+            fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+            height: "24px",
+            "@media (max-width: 600px)": {
+              height: "20px",
             },
           },
         },
       },
-      MuiDialog: {
+      MuiButton: {
         styleOverrides: {
-          paper: {
-            boxShadow:
-              mode === "dark"
-                ? "0 4px 20px rgba(0,0,0,0.3)"
-                : "0 4px 20px rgba(0,0,0,0.1)",
-          },
-        },
-      },
-      MuiPopover: {
-        styleOverrides: {
-          paper: {
-            boxShadow:
-              mode === "dark"
-                ? "0 4px 20px rgba(0,0,0,0.3)"
-                : "0 4px 20px rgba(0,0,0,0.1)",
+          root: {
+            "@media (max-width: 600px)": {
+              padding: "6px 12px",
+            },
           },
         },
       },
@@ -795,17 +763,31 @@ function App() {
         {/* Hero Section */}
         <Box sx={{ mb: 4, textAlign: "center" }}>
           <Typography
-            variant="h3"
-            sx={{ fontWeight: 800, mb: 2, lineHeight: 1.2 }}
+            variant="h4"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+              mb: 2,
+              background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+              lineHeight: 1.2,
+            }}
           >
-            {post.title}
+            SEO Tools & Resources Blog
           </Typography>
           <Typography
-            variant="h6"
-            color="text.secondary"
-            sx={{ mb: 3, maxWidth: "800px", mx: "auto" }}
+            variant="body1"
+            sx={{
+              color: "text.secondary",
+              mb: 4,
+              fontSize: { xs: "0.875rem", sm: "1rem" },
+              maxWidth: "600px",
+            }}
           >
-            {post.excerpt}
+            Discover the latest SEO tools, strategies, and insights to improve
+            your website's performance and visibility.
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -1486,8 +1468,14 @@ function App() {
                                   alignItems="center"
                                 >
                                   <Typography
-                                    variant="subtitle1"
-                                    sx={{ fontWeight: 600 }}
+                                    variant="h6"
+                                    component="h2"
+                                    sx={{
+                                      fontWeight: 600,
+                                      mb: 1,
+                                      fontSize: { xs: "1rem", sm: "1.1rem" },
+                                      lineHeight: 1.4,
+                                    }}
                                   >
                                     {tool.name}
                                   </Typography>
@@ -1556,17 +1544,14 @@ function App() {
                                 <Box>
                                   <Typography
                                     variant="body2"
-                                    color="text.secondary"
                                     sx={{
-                                      display: "-webkit-box",
-                                      WebkitLineClamp: expandedDescriptions[
-                                        index
-                                      ]
-                                        ? "none"
-                                        : 2,
-                                      WebkitBoxOrient: "vertical",
-                                      overflow: "hidden",
-                                      lineHeight: 1.5,
+                                      color: "text.secondary",
+                                      mb: 2,
+                                      fontSize: {
+                                        xs: "0.75rem",
+                                        sm: "0.875rem",
+                                      },
+                                      lineHeight: 1.6,
                                     }}
                                   >
                                     {tool.description}
