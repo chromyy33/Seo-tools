@@ -469,8 +469,10 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-  const [selectedBlog, setSelectedBlog] = useState(null);
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [toolsData, setToolsData] = useState([]);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const isBlogPost = location.pathname.startsWith("/blog/");
@@ -481,14 +483,8 @@ function App() {
   // Use imported blogPosts or fallback to empty array
   const blogPosts = importedBlogPosts || [];
 
-  // Use imported seoTools instead of the local array
+  // Remove unused variables
   const seoTools = importedSeoTools;
-
-  // Remove unnecessary state
-  const [isToolsLoaded, setIsToolsLoaded] = useState(false);
-  const [isBlogLoaded, setIsBlogLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [toolsData, setToolsData] = useState([]);
 
   // Pre-process data once when component mounts
   useEffect(() => {
@@ -517,7 +513,6 @@ function App() {
   }, []);
 
   // Optimize search with debounce
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
