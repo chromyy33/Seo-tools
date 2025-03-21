@@ -376,23 +376,25 @@ const BlogCard = React.memo(({ post, mode, getCategoryColor, navigate }) => (
       </Box>
       <Typography
         variant="h6"
-        component="h2"
+        gutterBottom
         sx={{
+          fontSize: "1.1rem",
           fontWeight: 600,
+          lineHeight: 1.3,
           mb: 1,
-          fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
-          lineHeight: 1.4,
         }}
       >
         {post.title}
       </Typography>
       <Typography
         variant="body2"
+        color="text.secondary"
         sx={{
-          color: "text.secondary",
           mb: 2,
-          fontSize: { xs: "0.75rem", sm: "0.875rem" },
-          lineHeight: 1.6,
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
         }}
       >
         {post.excerpt}
@@ -448,7 +450,7 @@ const BlogGrid = React.memo(
   ({ blogPosts, mode, getCategoryColor, navigate }) => (
     <Grid container spacing={3}>
       {blogPosts.map((post, index) => (
-        <Grid item xs={12} md={4} key={index}>
+        <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
           <BlogCard
             post={post}
             mode={mode}
@@ -588,6 +590,16 @@ function App() {
   const open = Boolean(anchorEl);
 
   const theme = createTheme({
+    breakpoints: {
+      values: {
+        xs: 0,
+        700: 700,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
     palette: {
       mode,
       primary: {
@@ -601,78 +613,120 @@ function App() {
         dark: "#5b21b6",
       },
       background: {
-        default: mode === "light" ? "#f8fafc" : "#0f172a",
-        paper: mode === "light" ? "#ffffff" : "#1e293b",
+        default: mode === "dark" ? "#0f172a" : "#f8fafc",
+        paper: mode === "dark" ? "#1e293b" : "#ffffff",
       },
     },
     typography: {
       fontFamily: '"Figtree", "Inter", sans-serif',
       h1: {
-        fontSize: "clamp(2.5rem, 6vw, 4rem)",
+        fontSize: "2.5rem",
         fontWeight: 700,
-        lineHeight: 1.2,
+        "@media (max-width:600px)": {
+          fontSize: "2.25rem",
+        },
       },
       h2: {
-        fontSize: "clamp(2rem, 5vw, 3rem)",
+        fontSize: "2rem",
         fontWeight: 600,
-        lineHeight: 1.3,
+        "@media (max-width:600px)": {
+          fontSize: "1.875rem",
+        },
       },
       h3: {
-        fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+        fontSize: "1.75rem",
         fontWeight: 600,
-        lineHeight: 1.4,
+        "@media (max-width:600px)": {
+          fontSize: "1.625rem",
+        },
       },
       h4: {
-        fontSize: "clamp(1.5rem, 3.5vw, 2rem)",
+        fontSize: "1.5rem",
         fontWeight: 600,
-        lineHeight: 1.4,
+        "@media (max-width:600px)": {
+          fontSize: "1.375rem",
+        },
       },
       h5: {
-        fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
+        fontSize: "1.25rem",
         fontWeight: 600,
-        lineHeight: 1.4,
+        "@media (max-width:600px)": {
+          fontSize: "1.175rem",
+        },
       },
       h6: {
-        fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)",
+        fontSize: "1.1rem",
         fontWeight: 600,
-        lineHeight: 1.4,
+        "@media (max-width:600px)": {
+          fontSize: "1.05rem",
+        },
       },
       body1: {
-        fontSize: "clamp(1rem, 2.5vw, 1.125rem)",
-        lineHeight: 1.6,
+        fontSize: "1.125rem",
+        lineHeight: 1.7,
+        "@media (max-width:600px)": {
+          fontSize: "1.05rem",
+        },
       },
       body2: {
-        fontSize: "clamp(0.875rem, 2vw, 1rem)",
+        fontSize: "1rem",
         lineHeight: 1.6,
+        "@media (max-width:600px)": {
+          fontSize: "0.95rem",
+        },
+      },
+      subtitle1: {
+        fontSize: "1.125rem",
+        fontWeight: 500,
+        "@media (max-width:600px)": {
+          fontSize: "1.05rem",
+        },
+      },
+      subtitle2: {
+        fontSize: "1rem",
+        fontWeight: 500,
+        "@media (max-width:600px)": {
+          fontSize: "0.95rem",
+        },
       },
       button: {
         textTransform: "none",
-        fontSize: "clamp(0.875rem, 2vw, 1rem)",
         fontWeight: 500,
-      },
-      subtitle1: {
-        fontSize: "clamp(1.125rem, 2.5vw, 1.25rem)",
-        fontWeight: 500,
-        lineHeight: 1.4,
-      },
-      subtitle2: {
-        fontSize: "clamp(1rem, 2vw, 1.125rem)",
-        fontWeight: 500,
-        lineHeight: 1.4,
+        fontSize: "1rem",
+        "@media (max-width:600px)": {
+          fontSize: "0.95rem",
+        },
       },
       caption: {
-        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
-        lineHeight: 1.4,
+        fontSize: "0.875rem",
+        "@media (max-width:600px)": {
+          fontSize: "0.85rem",
+        },
       },
     },
     components: {
       MuiTableCell: {
         styleOverrides: {
           root: {
-            fontSize: "clamp(0.875rem, 2vw, 1rem)",
-            padding: "12px 16px",
-            "@media (max-width: 600px)": {
-              padding: "10px 12px",
+            borderBottom: `1px solid ${mode === "dark" ? "#333" : "#f0f0f0"}`,
+            padding: "16px",
+          },
+          head: {
+            backgroundColor: "transparent",
+            fontWeight: 600,
+            color: mode === "dark" ? "#fff" : "#333",
+          },
+        },
+      },
+      MuiTableRow: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              backgroundColor: mode === "dark" ? "#1a1a1a" : "#f8f8f8",
+              boxShadow:
+                mode === "dark"
+                  ? "0 2px 8px rgba(0,0,0,0.2)"
+                  : "0 2px 8px rgba(0,0,0,0.05)",
             },
           },
         },
@@ -680,22 +734,92 @@ function App() {
       MuiChip: {
         styleOverrides: {
           root: {
-            fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
-            height: "28px",
-            "@media (max-width: 600px)": {
-              height: "24px",
+            height: "24px",
+            borderRadius: "12px",
+            cursor: "pointer",
+            boxShadow:
+              mode === "dark"
+                ? "0 1px 3px rgba(0,0,0,0.2)"
+                : "0 1px 3px rgba(0,0,0,0.1)",
+            "& .MuiChip-label": {
+              fontSize: "0.75rem",
+              padding: "0 8px",
+            },
+            "&:hover": {
+              boxShadow:
+                mode === "dark"
+                  ? "0 2px 5px rgba(0,0,0,0.3)"
+                  : "0 2px 5px rgba(0,0,0,0.15)",
             },
           },
         },
       },
-      MuiButton: {
+      MuiCard: {
         styleOverrides: {
           root: {
-            fontSize: "clamp(0.875rem, 2vw, 1rem)",
-            padding: "8px 16px",
-            "@media (max-width: 600px)": {
-              padding: "6px 12px",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            transition: "all 0.2s ease-in-out",
+            boxShadow:
+              mode === "dark"
+                ? "0 2px 8px rgba(0,0,0,0.2)"
+                : "0 2px 8px rgba(0,0,0,0.05)",
+            "&:hover": {
+              transform: "translateY(-4px)",
+              boxShadow:
+                mode === "dark"
+                  ? "0 8px 24px rgba(0,0,0,0.3)"
+                  : "0 8px 24px rgba(0,0,0,0.1)",
             },
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            boxShadow:
+              mode === "dark"
+                ? "0 2px 8px rgba(0,0,0,0.2)"
+                : "0 2px 8px rgba(0,0,0,0.05)",
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-root": {
+              boxShadow:
+                mode === "dark"
+                  ? "0 1px 3px rgba(0,0,0,0.2)"
+                  : "0 1px 3px rgba(0,0,0,0.05)",
+              "&:hover": {
+                boxShadow:
+                  mode === "dark"
+                    ? "0 2px 5px rgba(0,0,0,0.3)"
+                    : "0 2px 5px rgba(0,0,0,0.1)",
+              },
+            },
+          },
+        },
+      },
+      MuiDialog: {
+        styleOverrides: {
+          paper: {
+            boxShadow:
+              mode === "dark"
+                ? "0 4px 20px rgba(0,0,0,0.3)"
+                : "0 4px 20px rgba(0,0,0,0.1)",
+          },
+        },
+      },
+      MuiPopover: {
+        styleOverrides: {
+          paper: {
+            boxShadow:
+              mode === "dark"
+                ? "0 4px 20px rgba(0,0,0,0.3)"
+                : "0 4px 20px rgba(0,0,0,0.1)",
           },
         },
       },
@@ -747,9 +871,9 @@ function App() {
     };
 
     return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
         {/* Back Button at Top */}
-        <Box sx={{ mb: 4 }}>
+        <Box sx={{ mb: { xs: 2, md: 4 } }}>
           <Button
             startIcon={<ArrowLeft size={20} />}
             onClick={() => navigate("/")}
@@ -768,33 +892,29 @@ function App() {
         </Box>
 
         {/* Hero Section */}
-        <Box sx={{ mb: 4, textAlign: "center" }}>
+        <Box sx={{ mb: { xs: 3, md: 4 }, textAlign: "center" }}>
           <Typography
-            variant="h4"
-            component="h1"
+            variant="h3"
             sx={{
-              fontWeight: 700,
+              fontWeight: 800,
               mb: 2,
-              background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
               lineHeight: 1.2,
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             }}
           >
-            SEO Tools & Resources Blog
+            {post.title}
           </Typography>
           <Typography
-            variant="body1"
+            variant="h6"
+            color="text.secondary"
             sx={{
-              color: "text.secondary",
-              mb: 4,
-              fontSize: { xs: "0.875rem", sm: "1rem" },
-              maxWidth: "600px",
+              mb: 3,
+              maxWidth: "800px",
+              mx: "auto",
+              fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
             }}
           >
-            Discover the latest SEO tools, strategies, and insights to improve
-            your website's performance and visibility.
+            {post.excerpt}
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -804,8 +924,17 @@ function App() {
             sx={{ mb: 3 }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
-              <Avatar sx={{ width: 32, height: 32 }}>{post.author[0]}</Avatar>
-              <Typography variant="subtitle1">{post.author}</Typography>
+              <Avatar
+                sx={{ width: { xs: 28, sm: 32 }, height: { xs: 28, sm: 32 } }}
+              >
+                {post.author[0]}
+              </Avatar>
+              <Typography
+                variant="subtitle1"
+                sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}
+              >
+                {post.author}
+              </Typography>
             </Stack>
             <Stack
               direction="row"
@@ -825,19 +954,29 @@ function App() {
             >
               <Stack direction="row" spacing={1} alignItems="center">
                 <Calendar size={16} />
-                <Typography variant="body2">{post.date}</Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+                >
+                  {post.date}
+                </Typography>
               </Stack>
               <Stack direction="row" spacing={1} alignItems="center">
                 <BookOpen size={16} />
-                <Typography variant="body2">{post.readTime}</Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+                >
+                  {post.readTime}
+                </Typography>
               </Stack>
             </Stack>
           </Stack>
           <Stack
             direction="row"
-            spacing={1}
+            spacing={{ xs: 0.5, sm: 1 }}
             justifyContent="center"
-            sx={{ mb: 3 }}
+            sx={{ mb: 3, flexWrap: "wrap", gap: { xs: 0.5, sm: 1 } }}
           >
             <Chip
               label={post.category}
@@ -846,7 +985,8 @@ function App() {
                 bgcolor: getCategoryColor(post.category).bg,
                 color: getCategoryColor(post.category).color,
                 fontWeight: 600,
-                px: 2,
+                px: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.8rem", sm: "0.875rem" },
               }}
             />
             {post.tags.map((tag, idx) => (
@@ -858,20 +998,62 @@ function App() {
                 sx={{
                   borderColor: mode === "dark" ? "#666" : "#e0e0e0",
                   color: "text.secondary",
-                  px: 2,
+                  px: { xs: 1.5, sm: 2 },
+                  fontSize: { xs: "0.8rem", sm: "0.875rem" },
                 }}
               />
             ))}
           </Stack>
         </Box>
 
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={8}>
+        {/* Table of Contents as Navigation Tabs */}
+        <Box sx={{ mb: { xs: 3, md: 4 } }}>
+          <Tabs
+            value={0}
+            variant="scrollable"
+            scrollButtons="auto"
+            sx={{
+              borderBottom: 1,
+              borderColor:
+                mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+              "& .MuiTabs-indicator": {
+                backgroundColor: "primary.main",
+                height: 2,
+              },
+              "& .MuiTab-root": {
+                textTransform: "none",
+                minWidth: "auto",
+                px: 2,
+                fontSize: { xs: "0.85rem", sm: "0.9rem" },
+                "&.Mui-selected": {
+                  color: "primary.main",
+                  fontWeight: 600,
+                },
+              },
+            }}
+          >
+            {toc.map((item, index) => (
+              <Tab
+                key={index}
+                label={`${index + 1}. ${item.text}`}
+                onClick={() =>
+                  document
+                    .getElementById(item.id)
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              />
+            ))}
+          </Tabs>
+        </Box>
+
+        <Grid container spacing={{ xs: 2, md: 4 }}>
+          {/* Main content */}
+          <Grid item xs={12} md={8} sx={{ order: { xs: 1, md: 1 } }}>
             <Box
               dangerouslySetInnerHTML={{ __html: post.content }}
               sx={{
                 "& h2": {
-                  fontSize: "1.75rem",
+                  fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
                   fontWeight: 800,
                   mb: 2,
                   mt: 4,
@@ -882,7 +1064,7 @@ function App() {
                   mt: 0,
                 },
                 "& h3": {
-                  fontSize: "1.35rem",
+                  fontSize: { xs: "1.25rem", sm: "1.35rem", md: "1.5rem" },
                   fontWeight: 700,
                   mb: 2,
                   mt: 3,
@@ -890,7 +1072,7 @@ function App() {
                   scrollMarginTop: "100px",
                 },
                 "& h4": {
-                  fontSize: "1.15rem",
+                  fontSize: { xs: "1.1rem", sm: "1.15rem", md: "1.25rem" },
                   fontWeight: 600,
                   mb: 1.5,
                   color: mode === "dark" ? "#d0d0d0" : "#3a3a3a",
@@ -898,27 +1080,28 @@ function App() {
                 "& p": {
                   mb: 2,
                   lineHeight: 1.7,
-                  fontSize: "1rem",
+                  fontSize: { xs: "0.95rem", sm: "1rem", md: "1.05rem" },
                 },
                 "& .lead": {
-                  fontSize: "1.1rem",
+                  fontSize: { xs: "1rem", sm: "1.1rem", md: "1.15rem" },
                   color: "text.secondary",
                   mb: 3,
                 },
                 "& ul, & ol": {
-                  pl: 3,
+                  pl: { xs: 2, sm: 3 },
                   mb: 3,
                 },
                 "& li": {
                   mb: 1,
                   lineHeight: 1.6,
+                  fontSize: { xs: "0.95rem", sm: "1rem", md: "1.05rem" },
                 },
                 "& .highlight-box": {
                   bgcolor:
                     mode === "dark"
                       ? "rgba(255,255,255,0.05)"
                       : "rgba(0,0,0,0.02)",
-                  p: 2.5,
+                  p: { xs: 2, sm: 2.5 },
                   borderRadius: 2,
                   mb: 3,
                   border: 1,
@@ -932,7 +1115,7 @@ function App() {
                     mode === "dark"
                       ? "rgba(255,255,255,0.05)"
                       : "rgba(0,0,0,0.02)",
-                  p: 2.5,
+                  p: { xs: 2, sm: 2.5 },
                   borderRadius: 2,
                   mb: 3,
                   "& ol": {
@@ -942,7 +1125,7 @@ function App() {
                     "& li": {
                       counterIncrement: "steps",
                       position: "relative",
-                      pl: 4,
+                      pl: { xs: 3, sm: 4 },
                       "&::before": {
                         content: "counter(steps)",
                         position: "absolute",
@@ -966,8 +1149,15 @@ function App() {
 
             {/* FAQ Section */}
             {post.faqs && post.faqs.length > 0 && (
-              <Box sx={{ mt: 6 }}>
-                <Typography variant="h4" sx={{ mb: 3, fontWeight: 800 }}>
+              <Box sx={{ mt: { xs: 4, md: 6 } }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    mb: 3,
+                    fontWeight: 800,
+                    fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
+                  }}
+                >
                   Frequently Asked Questions
                 </Typography>
                 <Box sx={{ maxWidth: "800px" }}>
@@ -997,13 +1187,21 @@ function App() {
                       >
                         <Typography
                           variant="subtitle1"
-                          sx={{ fontWeight: 600 }}
+                          sx={{
+                            fontWeight: 600,
+                            fontSize: { xs: "0.95rem", sm: "1rem" },
+                          }}
                         >
                           {faq.question}
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails sx={{ pt: 0, pb: 2.5 }}>
-                        <Typography sx={{ lineHeight: 1.6 }}>
+                        <Typography
+                          sx={{
+                            lineHeight: 1.6,
+                            fontSize: { xs: "0.95rem", sm: "1rem" },
+                          }}
+                        >
                           {faq.answer}
                         </Typography>
                       </AccordionDetails>
@@ -1014,67 +1212,20 @@ function App() {
             )}
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          {/* Sidebar content */}
+          <Grid item xs={12} md={4} sx={{ order: { xs: 2, md: 2 } }}>
             <Box
               sx={{
-                position: "sticky",
+                position: { xs: "static", md: "sticky" },
                 top: 24,
                 pl: { md: 4 },
               }}
             >
-              {/* Table of Contents */}
-              <Card
-                sx={{
-                  mb: 3,
-                  p: 2.5,
-                  bgcolor:
-                    mode === "dark"
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(0,0,0,0.02)",
-                  boxShadow: "none",
-                  border: 1,
-                  borderColor:
-                    mode === "dark"
-                      ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.1)",
-                }}
-              >
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 700 }}>
-                  Table of Contents
-                </Typography>
-                <Stack spacing={0.75}>
-                  {toc.map((item, index) => (
-                    <Button
-                      key={index}
-                      onClick={() =>
-                        document
-                          .getElementById(item.id)
-                          ?.scrollIntoView({ behavior: "smooth" })
-                      }
-                      sx={{
-                        justifyContent: "flex-start",
-                        textTransform: "none",
-                        color: "text.secondary",
-                        pl: 1,
-                        py: 0.75,
-                        fontSize: "0.9rem",
-                        "&:hover": {
-                          color: "primary.main",
-                          bgcolor: "transparent",
-                        },
-                      }}
-                    >
-                      {index + 1}. {item.text}
-                    </Button>
-                  ))}
-                </Stack>
-              </Card>
-
               {/* Author Bio */}
               <Card
                 sx={{
                   mb: 3,
-                  p: 2.5,
+                  p: { xs: 2, sm: 2.5 },
                   bgcolor:
                     mode === "dark"
                       ? "rgba(255,255,255,0.05)"
@@ -1094,15 +1245,29 @@ function App() {
                   sx={{ mb: 2 }}
                 >
                   <Avatar
-                    sx={{ width: 56, height: 56, bgcolor: "primary.main" }}
+                    sx={{
+                      width: { xs: 48, sm: 56 },
+                      height: { xs: 48, sm: 56 },
+                      bgcolor: "primary.main",
+                    }}
                   >
                     {post.author[0]}
                   </Avatar>
                   <Box>
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 600,
+                        fontSize: { xs: "1rem", sm: "1.1rem" },
+                      }}
+                    >
                       {post.author}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: { xs: "0.85rem", sm: "0.875rem" } }}
+                    >
                       SEO Expert & Content Strategist
                     </Typography>
                   </Box>
@@ -1110,7 +1275,10 @@ function App() {
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ lineHeight: 1.6 }}
+                  sx={{
+                    lineHeight: 1.6,
+                    fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                  }}
                 >
                   {post.author} is an experienced SEO professional with over 5
                   years of expertise in digital marketing and content strategy.
@@ -1120,7 +1288,7 @@ function App() {
               {/* Share Buttons */}
               <Card
                 sx={{
-                  p: 2.5,
+                  p: { xs: 2, sm: 2.5 },
                   bgcolor:
                     mode === "dark"
                       ? "rgba(255,255,255,0.05)"
@@ -1133,7 +1301,14 @@ function App() {
                       : "rgba(0,0,0,0.1)",
                 }}
               >
-                <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    mb: 2,
+                    fontWeight: 600,
+                    fontSize: { xs: "0.95rem", sm: "1rem" },
+                  }}
+                >
                   Share this article
                 </Typography>
                 <Stack direction="row" spacing={1}>
@@ -1205,13 +1380,9 @@ function App() {
           }}
         >
           <Toolbar>
-            <Typography
-              variant="h5"
-              component="div"
+            <Box
               onClick={() => navigate("/")}
               sx={{
-                fontWeight: 700,
-                color: mode === "dark" ? "#fff" : "#333",
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
@@ -1222,10 +1393,26 @@ function App() {
               }}
             >
               <LayoutDashboard size={24} />
-              SEO Tools Hub
-            </Typography>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{
+                  fontWeight: 700,
+                  color: mode === "dark" ? "#fff" : "#333",
+                  display: { xs: "none", sm: "block" }, // Hide only text on mobile
+                }}
+              >
+                SEO Tools Hub
+              </Typography>
+            </Box>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: { xs: 1, sm: 2 },
+                alignItems: "center",
+              }}
+            >
               <Button
                 startIcon={<FileText size={18} />}
                 onClick={() => navigate("/")}
@@ -1237,6 +1424,7 @@ function App() {
                     color: "primary.main",
                     bgcolor: "transparent",
                   },
+                  px: { xs: 1, sm: 2 },
                 }}
               >
                 Blog
@@ -1252,6 +1440,7 @@ function App() {
                     color: "primary.main",
                     bgcolor: "transparent",
                   },
+                  px: { xs: 1, sm: 2 },
                 }}
               >
                 SEO Tools
@@ -1271,26 +1460,38 @@ function App() {
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
+                  fontSize: {
+                    xs: "2rem", // 32px for mobile
+                    sm: "2.5rem", // 40px for tablets
+                    md: "3rem", // 48px max size
+                  },
                   fontWeight: 800,
-                  mb: 4,
+                  mb: { xs: 2, sm: 3, md: 4 },
                   textAlign: "center",
                   background: "linear-gradient(45deg, #2196f3, #1976d2)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  lineHeight: 1.2,
+                  lineHeight: { xs: 1.2, sm: 1.3 },
+                  px: { xs: 2, sm: 0 },
                 }}
               >
-                SEO Tools & Resources Blog
+                SEO Tools & Blog
               </Typography>
               <Typography
                 variant="h5"
                 color="text.secondary"
                 sx={{
                   textAlign: "center",
-                  mb: 6,
+                  mb: { xs: 4, sm: 5, md: 6 },
                   maxWidth: "800px",
                   mx: "auto",
+                  fontSize: {
+                    xs: "1.1rem",
+                    sm: "1.25rem",
+                    md: "1.5rem",
+                  },
+                  px: { xs: 2, sm: 3, md: 0 },
+                  lineHeight: { xs: 1.4, sm: 1.5 },
                 }}
               >
                 Discover the latest insights, tips, and best practices for
@@ -1475,13 +1676,11 @@ function App() {
                                   alignItems="center"
                                 >
                                   <Typography
-                                    variant="h6"
-                                    component="h2"
+                                    variant="subtitle1"
                                     sx={{
                                       fontWeight: 600,
-                                      mb: 1,
-                                      fontSize: { xs: "1rem", sm: "1.1rem" },
-                                      lineHeight: 1.4,
+                                      fontSize: { xs: "1.25rem", sm: "1.1rem" },
+                                      lineHeight: 1.3,
                                     }}
                                   >
                                     {tool.name}
@@ -1498,7 +1697,7 @@ function App() {
                                       },
                                     }}
                                   >
-                                    <ExternalLink size={16} />
+                                    <ExternalLink size={18} />
                                   </IconButton>
                                 </Stack>
 
@@ -1515,11 +1714,19 @@ function App() {
                                       <Chip
                                         key={idx}
                                         label={cat}
-                                        size="small"
+                                        size="medium"
                                         sx={{
                                           bgcolor: colors.bg,
                                           color: colors.color,
                                           fontWeight: 500,
+                                          height: { xs: "28px", sm: "24px" },
+                                          "& .MuiChip-label": {
+                                            fontSize: {
+                                              xs: "0.9rem",
+                                              sm: "0.75rem",
+                                            },
+                                            px: { xs: 1.5, sm: 1 },
+                                          },
                                         }}
                                       />
                                     );
@@ -1527,7 +1734,7 @@ function App() {
                                   {tool.category.length > 2 && (
                                     <Chip
                                       label={`+${tool.category.length - 2}`}
-                                      size="small"
+                                      size="medium"
                                       onClick={(e) =>
                                         handleCategoryClick(e, tool.category)
                                       }
@@ -1536,6 +1743,14 @@ function App() {
                                           mode === "dark" ? "#333" : "#f0f0f0",
                                         color: "text.secondary",
                                         fontWeight: 500,
+                                        height: { xs: "28px", sm: "24px" },
+                                        "& .MuiChip-label": {
+                                          fontSize: {
+                                            xs: "0.9rem",
+                                            sm: "0.75rem",
+                                          },
+                                          px: { xs: 1.5, sm: 1 },
+                                        },
                                         "&:hover": {
                                           bgcolor:
                                             mode === "dark"
@@ -1551,14 +1766,22 @@ function App() {
                                 <Box>
                                   <Typography
                                     variant="body2"
+                                    color="text.secondary"
                                     sx={{
-                                      color: "text.secondary",
-                                      mb: 2,
-                                      fontSize: {
-                                        xs: "0.75rem",
-                                        sm: "0.875rem",
-                                      },
+                                      display: "-webkit-box",
+                                      WebkitLineClamp: expandedDescriptions[
+                                        index
+                                      ]
+                                        ? "none"
+                                        : 2,
+                                      WebkitBoxOrient: "vertical",
+                                      overflow: "hidden",
                                       lineHeight: 1.6,
+                                      fontSize: {
+                                        xs: "1rem",
+                                        sm: "1rem",
+                                        md: "0.875rem",
+                                      },
                                     }}
                                   >
                                     {tool.description}
@@ -1570,6 +1793,11 @@ function App() {
                                       textTransform: "none",
                                       p: 0,
                                       minWidth: "auto",
+                                      fontSize: {
+                                        xs: "1rem",
+                                        sm: "1rem",
+                                        md: "0.875rem",
+                                      },
                                       "&:hover": {
                                         backgroundColor: "transparent",
                                         color: "primary.main",
@@ -1599,6 +1827,14 @@ function App() {
                                       precision={0.1}
                                       readOnly
                                       size="small"
+                                      sx={{
+                                        "& .MuiRating-icon": {
+                                          fontSize: {
+                                            xs: "1.5rem",
+                                            sm: "1.25rem",
+                                          },
+                                        },
+                                      }}
                                     />
                                     <Typography
                                       variant="caption"
