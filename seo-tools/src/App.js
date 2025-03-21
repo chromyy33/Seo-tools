@@ -608,66 +608,71 @@ function App() {
     typography: {
       fontFamily: '"Figtree", "Inter", sans-serif',
       h1: {
-        fontSize: "clamp(2rem, 5vw, 3.5rem)",
+        fontSize: "clamp(2.5rem, 6vw, 4rem)",
         fontWeight: 700,
         lineHeight: 1.2,
       },
       h2: {
-        fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+        fontSize: "clamp(2rem, 5vw, 3rem)",
         fontWeight: 600,
         lineHeight: 1.3,
       },
       h3: {
-        fontSize: "clamp(1.25rem, 3vw, 2rem)",
+        fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
         fontWeight: 600,
         lineHeight: 1.4,
       },
       h4: {
-        fontSize: "clamp(1.1rem, 2.5vw, 1.75rem)",
+        fontSize: "clamp(1.5rem, 3.5vw, 2rem)",
         fontWeight: 600,
         lineHeight: 1.4,
       },
       h5: {
-        fontSize: "clamp(1rem, 2vw, 1.5rem)",
+        fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
         fontWeight: 600,
         lineHeight: 1.4,
       },
       h6: {
-        fontSize: "clamp(0.875rem, 1.75vw, 1.25rem)",
+        fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)",
         fontWeight: 600,
         lineHeight: 1.4,
       },
       body1: {
-        fontSize: "clamp(0.875rem, 2vw, 1rem)",
+        fontSize: "clamp(1rem, 2.5vw, 1.125rem)",
         lineHeight: 1.6,
       },
       body2: {
-        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+        fontSize: "clamp(0.875rem, 2vw, 1rem)",
         lineHeight: 1.6,
       },
       button: {
         textTransform: "none",
-        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+        fontSize: "clamp(0.875rem, 2vw, 1rem)",
         fontWeight: 500,
+      },
+      subtitle1: {
+        fontSize: "clamp(1.125rem, 2.5vw, 1.25rem)",
+        fontWeight: 500,
+        lineHeight: 1.4,
+      },
+      subtitle2: {
+        fontSize: "clamp(1rem, 2vw, 1.125rem)",
+        fontWeight: 500,
+        lineHeight: 1.4,
+      },
+      caption: {
+        fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+        lineHeight: 1.4,
       },
     },
     components: {
       MuiTableCell: {
         styleOverrides: {
           root: {
-            fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
-            padding: "8px 16px",
+            fontSize: "clamp(0.875rem, 2vw, 1rem)",
+            padding: "12px 16px",
             "@media (max-width: 600px)": {
-              padding: "6px 12px",
-            },
-          },
-        },
-      },
-      MuiCard: {
-        styleOverrides: {
-          root: {
-            "@media (max-width: 600px)": {
-              margin: "8px 0",
+              padding: "10px 12px",
             },
           },
         },
@@ -675,10 +680,10 @@ function App() {
       MuiChip: {
         styleOverrides: {
           root: {
-            fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
-            height: "24px",
+            fontSize: "clamp(0.75rem, 1.75vw, 0.875rem)",
+            height: "28px",
             "@media (max-width: 600px)": {
-              height: "20px",
+              height: "24px",
             },
           },
         },
@@ -686,6 +691,8 @@ function App() {
       MuiButton: {
         styleOverrides: {
           root: {
+            fontSize: "clamp(0.875rem, 2vw, 1rem)",
+            padding: "8px 16px",
             "@media (max-width: 600px)": {
               padding: "6px 12px",
             },
