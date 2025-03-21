@@ -1475,7 +1475,7 @@ function App() {
                   px: { xs: 2, sm: 0 },
                 }}
               >
-                SEO Tools & Blog
+                Best Free & Premium SEO Tools Collection 2024
               </Typography>
               <Typography
                 variant="h5"
@@ -1494,9 +1494,8 @@ function App() {
                   lineHeight: { xs: 1.4, sm: 1.5 },
                 }}
               >
-                Discover the latest insights, tips, and best practices for
-                optimizing your website and improving your search engine
-                rankings.
+                Discover and compare the most comprehensive collection of SEO
+                tools to boost your website's performance
               </Typography>
               <BlogGrid
                 blogPosts={blogPosts}
